@@ -1,4 +1,1 @@
-This is your new Play 2.1 application
-=====================================
-
-This file will be packaged with your application, when using `play dist`.
+Honeybird is a general purpose event log for recording things that happen. While it aims to have a useful and friendly user-interface it's primary purpose will be to store events sent to it's REST API and serve them back out to interested parties.
