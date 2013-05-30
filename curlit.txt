@@ -1,0 +1,3 @@
+curl --header "Content-type: application/json" --request PUT --data '{"service": "observe.cuckoo", "source": "box1", "etype": "deployment", "content": "abc", "date_begun": "20130529T204100Z"}' http://localhost:9000/store
+
+curl --header "Content-type: application/json" --request PUT --data '{"service": "observe.hummingbird", "source": "box2", "etype": "incident", "content": "abc", "date_begun": "20130529T232600Z"}' http://localhost:9000/store
