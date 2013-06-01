@@ -23,10 +23,6 @@ object Application extends Controller {
     ((__ \ 'date_ended).json.pickBranch orElse emptyObj)
   ).reduce
 
-  val makeResponse: Reads[JsObject] = (
-    (__ \\ '_source).json.pickBranch
-  )
-
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
   }
