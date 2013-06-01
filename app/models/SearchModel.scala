@@ -16,7 +16,7 @@ object SearchModel {
   val esClient = new Client(esURL)
 
   val indexSettings = "{\"settings\": { \"index\": { \"number_of_shards\": 1 } } }"
-  val indexName = "events"
+  val indexName = "honeybird"
   val ttype = "event"
   val mapping = """
   {
@@ -93,7 +93,21 @@ object SearchModel {
 
     val actualFilters: Seq[JsObject] = filters.flatMap({ kv =>
       kv._2.map({ v =>
-        Json.obj("term" -> Json.obj(kv._1 -> v))
+        if(kv._1.equals("date_begun")) {
+          Json.obj("range" -> Json.obj(
+            "date_begun" -> Json.obj(
+              "gte" -> v
+            )
+          ))
+        } else if(kv._1.equals("date_ended")) {
+          Json.obj("range" -> Json.obj(
+            "date_begun" -> Json.obj(
+              "lte" -> v
+            )
+          ))
+        } else {
+          Json.obj("term" -> Json.obj(kv._1 -> v))
+        }
       })
     }).toSeq
 
@@ -101,7 +115,7 @@ object SearchModel {
       "match_all" -> Json.obj()
     )
 
-    val actualQuery = if(filters.isEmpty) {
+    val actualQuery = if(actualFilters.isEmpty) {
       allQuery
     } else {
       Json.obj(

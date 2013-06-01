@@ -23,17 +23,22 @@ object Application extends Controller {
     ((__ \ 'date_ended).json.pickBranch orElse emptyObj)
   ).reduce
 
+  val makeResponse: Reads[JsObject] = (
+    (__ \\ '_source).json.pickBranch
+  )
+
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
   }
 
   def search = Action { request =>
-    val params = Seq("service", "source", "etype")
+    val params = Seq("service", "source", "etype", "date_begun", "date_ended")
 
     val filters = request.queryString filterKeys { key => params.contains(key) }
 
     val res = SearchModel.searchEvent(filters)
     val response = Await.result(res, Duration(1, "seconds")).getResponseBody
+
     Ok(response)
   }
 
