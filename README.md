@@ -16,7 +16,9 @@ It stores everything in [ElasticSearch](http://www.elasticsearch.org) because I'
 
 You can store an event by PUTing some JSON:
 
-  curl --header "Content-type: application/json" --request PUT --data '{"service": "cuckoo", "source": "box1", "etype": "deployment", "user": "cwatson", "content": "abc", "date_begun": "20130529T204100Z"}' http://localhost:9000/store
+```
+curl --header "Content-type: application/json" --request PUT --data '{"service": "cuckoo", "source": "box1", "etype": "deployment", "user": "cwatson", "content": "abc", "date_begun": "20130529T204100Z"}' http://localhost:9000/store
+```
 
 You can fetch the events by GETting: http://127.0.0.1:9000/search
 
