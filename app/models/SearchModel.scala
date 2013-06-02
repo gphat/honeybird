@@ -38,6 +38,10 @@ object SearchModel {
           "type": "string",
           "index": "not_analyzed"
         },
+        "user": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
         "url": {
           "type": "string",
           "index": "not_analyzed"
@@ -131,7 +135,29 @@ object SearchModel {
     val finalSearch = Json.obj(
       "query" -> actualQuery,
       "sort" -> Json.arr(
-        Json.obj("date_begun" -> Json.obj("order" -> "asc"))
+        Json.obj("date_begun" -> Json.obj("order" -> "desc"))
+      ),
+      "facets" -> Json.obj(
+        "service" -> Json.obj(
+          "terms" -> Json.obj(
+            "field" -> "service"
+          )
+        ),
+        "source" -> Json.obj(
+          "terms" -> Json.obj(
+            "field" -> "source"
+          )
+        ),
+        "etype" -> Json.obj(
+          "terms" -> Json.obj(
+            "field" -> "etype"
+          )
+        ),
+        "user" -> Json.obj(
+          "terms" -> Json.obj(
+            "field" -> "user"
+          )
+        )
       )
     )
 

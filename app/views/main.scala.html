@@ -13,6 +13,14 @@
     <link href="@routes.Assets.at("stylesheets/bootstrap.min.css")" rel="stylesheet">
     <link href="@routes.Assets.at("stylesheets/main.css")" rel="stylesheet">
 
+    <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/knockout-2.2.1.js")"></script>
+    <script src="@routes.Assets.at("javascripts/underscore-min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/honeybird.js")"></script>
+    <script src="@routes.Assets.at("javascripts/moment.min.js")"></script>
+    <script src="@routes.Assets.at("javascripts/URI.js")"></script>
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -45,33 +53,7 @@
     </div>
 
     <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
          @content
-        </div><!--/span-->
-      </div><!--/row-->
 
       <hr>
 
@@ -80,7 +62,5 @@
       </footer>
 
     </div><!--/.fluid-container-->
-    <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
   </body>
 </html>

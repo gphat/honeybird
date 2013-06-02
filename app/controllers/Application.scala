@@ -17,7 +17,8 @@ object Application extends Controller {
     (__ \ 'service ).json.pickBranch and
     ((__ \ 'source).json.pickBranch orElse emptyObj) and
     (__ \ 'etype).json.pickBranch and
-    ((__ \ 'content).json.pickBranch) and
+    (__ \ 'content).json.pickBranch and
+    (__ \ 'user).json.pickBranch and
     ((__ \ 'url).json.pickBranch orElse emptyObj) and
     (__ \ 'date_begun).json.pickBranch and
     ((__ \ 'date_ended).json.pickBranch orElse emptyObj)
@@ -34,15 +35,14 @@ object Application extends Controller {
 
     val res = SearchModel.searchEvent(filters)
     val response = Await.result(res, Duration(1, "seconds")).getResponseBody
-
     Ok(response)
   }
 
   def store = Action(parse.json) { request =>
     request.body.transform(validateEvent).map({ jsobj =>
 
-      val foo = SearchModel.indexEvent(jsobj)
-      Logger.debug(Await.result(foo, Duration(1, "second")).getResponseBody)
+      val s = SearchModel.indexEvent(jsobj)
+      Logger.debug(Await.result(s, Duration(1, "second")).getResponseBody)
       Ok(jsobj)
     }).recoverTotal({
       e => BadRequest(Json.obj("status" -> "KO", "message" -> JsError.toFlatJson(e)))

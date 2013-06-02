@@ -2,6 +2,39 @@
 
 @main("Honeybird") {
 
-  Hello World!
+<div class="row-fluid">
+  <div class="span3">
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li data-bind="visible: filters().length > 0" class="nav-header">Filters</li>
+        <!-- ko foreach: filters -->
+        <li class="filter"><a data-bind="click: removeFilter"><span class="label label-important"><span data-bind="text: linkName"></span> <i class="icon-remove icon-white"></i></span></a></li>
+        <!-- /ko -->
+        <!-- ko foreach: facetCollection -->
+        <li class="nav-header" data-bind="text: name"></li>
+        <!-- ko foreach: facets -->
+        <li><a data-bind="click: function(data, event) { addFilter(data, $parent) }"><span data-bind="text: value"></span> <span class="badge" data-bind="text: count"></span></a></li>
+        <!-- /ko -->
+        <!-- /ko -->
+      </ul>
+    </div><!--/.well -->
+  </div><!--/span-->
+  <div class="span9">
+    <div id="results">
+       <ul data-bind="foreach: events()">
+         <li class="well well-small">
+           <i data-bind="css: icon"></i>
+           <a data-bind="text: user"></a> caused <span data-bind="text: etype"></span> for <span data-bind="text: service">asdasd</span> <span data-bind="visible: hasSource">on <span data-bind="text: source"></span> <time data-bind="text: ago, attr: { datetime: date_begun }"></span>.</span>
+         </li>
+       </ul>
+     </div>
+   </div><!--/span-->
+</div><!--/row-->
 
+<script>
+$(function(){
+  var view = ResultsViewModel();
+  ko.applyBindings(view);
+});
+</script>
 }
