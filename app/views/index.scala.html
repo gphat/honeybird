@@ -18,6 +18,9 @@
         <!-- /ko -->
       </ul>
     </div><!--/.well -->
+    <div id="loading" style="display: none">
+      <img src="@routes.Assets.at("img/loading.gif")">
+    </div>
   </div><!--/span-->
   <div class="span9">
     <div id="results">
@@ -35,6 +38,12 @@
 $(function(){
   var view = ResultsViewModel();
   ko.applyBindings(view);
+
+  $(document).ajaxStart(function() {
+    $("#loading").show(0);
+  }).ajaxComplete(function() {
+    $("#loading").hide(0)
+  });
 });
 </script>
 }

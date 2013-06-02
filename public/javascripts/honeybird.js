@@ -96,4 +96,6 @@ function ResultsViewModel() {
 
   // Initial load.
   showEvents();
+
+  window.setInterval(showEvents, 3000);
 }
