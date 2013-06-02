@@ -29,7 +29,7 @@ object Application extends Controller {
   }
 
   def search(page: Int = 0, count: Int = 20) = Action { request =>
-    val params = Seq("service", "source", "etype", "date_begun", "date_ended")
+    val params = Seq("service", "source", "etype", "date_begun", "date_ended", "user")
 
     val filters = request.queryString filterKeys { key => params.contains(key) }
 
