@@ -11,6 +11,12 @@ import wabisabi.Client
 
 object SearchModel {
 
+  case class Query(
+    page: Int = 0,
+    count: Int = 20,
+    filters: Map[String,Seq[String]] = Map.empty
+  )
+
   val esURL = "http://localhost:9200"
   Logger.debug("Trying to connect to " + esURL)
   val esClient = new Client(esURL)
@@ -93,9 +99,9 @@ object SearchModel {
     esClient.index(index = indexName, `type` = ttype, data = event.toString, refresh = block)
   }
 
-  def searchEvent(filters: Map[String,Seq[String]]) = {
+  def searchEvent(query: Query) = {
 
-    val actualFilters: Seq[JsObject] = filters.flatMap({ kv =>
+    val actualFilters: Seq[JsObject] = query.filters.flatMap({ kv =>
       kv._2.map({ v =>
         if(kv._1.equals("date_begun")) {
           Json.obj("range" -> Json.obj(
@@ -133,6 +139,8 @@ object SearchModel {
     }
 
     val finalSearch = Json.obj(
+      "from"  -> query.page,
+      "size"  -> query.count,
       "query" -> actualQuery,
       "sort" -> Json.arr(
         Json.obj("date_begun" -> Json.obj("order" -> "desc"))

@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                           controllers.Application.index
-GET     /search                     controllers.Application.search
+GET     /search                     controllers.Application.search(page: Int ?= 1, count: Int ?= 20)
 PUT     /store                      controllers.Application.store
 
 # Map static resources from the /public folder to the /assets URL path

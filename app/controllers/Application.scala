@@ -28,12 +28,18 @@ object Application extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def search = Action { request =>
+  def search(page: Int = 0, count: Int = 20) = Action { request =>
     val params = Seq("service", "source", "etype", "date_begun", "date_ended")
 
     val filters = request.queryString filterKeys { key => params.contains(key) }
 
-    val res = SearchModel.searchEvent(filters)
+    val query = SearchModel.Query(
+      page = page,
+      count = count,
+      filters = filters
+    )
+
+    val res = SearchModel.searchEvent(query)
     val response = Await.result(res, Duration(1, "seconds")).getResponseBody
     Ok(response)
   }
